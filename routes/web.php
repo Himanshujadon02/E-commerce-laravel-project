@@ -7,6 +7,8 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\admin\subCategoryController;
 use App\Http\Controllers\admin\BrandController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ProductSubCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -71,5 +73,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/brand/{brand}/', [BrandController::class, 'update'])->name('brand.update');
         Route::delete('/brand/{brand}/', [BrandController::class, 'destroy'])->name('brand.delete');
         Route::delete('/brand/{brand}/', [BrandController::class, 'destroy'])->name('brand.delete');
+
+        //product
+        Route::get('/products/create',[ProductController::class,'create'])->name('products.create');
+        Route::get('/product-sub-category',[ProductSubCategoryController::class,'index'])->name('product-sub-category.index');
+        Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+
+
+
     });
 });
