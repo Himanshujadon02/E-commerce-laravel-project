@@ -47,7 +47,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="slug">Slug</label>
-                                    <input type="text" readonly name="slug" id="slug"  value="{{$subCategory->slug}}" class="form-control"
+                                    <input type="text" name="slug" id="slug"  value="{{$subCategory->slug}}" class="form-control"
                                         placeholder="Slug">
                                     <p></p>
                                 </div>
@@ -59,6 +59,16 @@
                                         <option {{ ($subCategory->status == 1) ? 'selected' : ''}} value="1">Active</option>
                                         <option {{ ($subCategory->status == 0) ? 'selected' : ''}} value="0">Block</option>
 
+                                    </select>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="showHome">Show On Home</label>
+                                    <select name="showHome" id="showHome" class="form-control">
+                                        <option {{ ($subCategory->showHome == 'Yes') ? 'selected' : ''}} value="Yes">Yes</option>
+                                        <option {{ ($subCategory->showHome == 'No') ? 'selected' : ''}} value="No">No</option>
                                     </select>
                                     <p></p>
                                 </div>

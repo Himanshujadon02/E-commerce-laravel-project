@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\TempImage;
 use Illuminate\Http\Request;
+use Image;
 
 class TempImagesController extends Controller
 {
@@ -20,9 +21,20 @@ class TempImagesController extends Controller
             $tempImage->save();
 
             $image->move(public_path().'/temp',$newName);
+
+
+            // create thumbnail
+            $sourcePath = public_path().'/temp/'.$newName;
+            $destPath = public_path().'/temp/thumb/'.$newName;
+            $image = Image::make($sourcePath);
+            $image->fit(300,375);
+            $image->save($destPath);
+
+
             return response()->json([
                 'status' => true,
                 'image_id' => $tempImage->id,
+                'ImagePath' => asset('/temp/thumb/'.$newName),
                 'message' => 'image uploaded successfully'
             ]);
         }

@@ -30,13 +30,14 @@ class CategoryController extends Controller
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
             'name' => 'required',
-            'slug' => 'required|unique:categories',
+            'slug' => 'required|unique:categories'
         ]);
         if ($validator->passes()){
             $category = new Category();
             $category->name=$request->name;
             $category->slug=$request->slug;
             $category->status=$request->status;
+            $category->showHome=$request->showHome;
             $category->save();
 
             // save image here
@@ -122,7 +123,7 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->slug = $request->slug;
             $category->status = $request->status;
-            // Save the updated category data
+            $category->showHome = $request->showHome;
             $category->save();
 
             $oldImage = $category->image;

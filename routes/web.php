@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\ProductImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\HomeController;
@@ -12,13 +13,14 @@ use App\Http\Controllers\admin\ProductSubCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use App\Http\Controllers\Front\FrontController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
-
+Route::get('/', [FrontController::class, 'index'])->name('front.home');
 
 Route::group(['prefix' => 'admin'], function () {
 
@@ -75,10 +77,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/brand/{brand}/', [BrandController::class, 'destroy'])->name('brand.delete');
 
         //product
+        Route::get('/products',[ProductController::class,'index'])->name('product.list');
         Route::get('/products/create',[ProductController::class,'create'])->name('products.create');
         Route::get('/product-sub-category',[ProductSubCategoryController::class,'index'])->name('product-sub-category.index');
         Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+        Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::put('/product/{brand}/', [ProductController::class, 'update'])->name('product.update');
 
+        Route::post('/product-image/update',[ProductImageController::class,'update'])->name('product-images.update');
+        Route::delete('/product-image',[ProductImageController::class,'destroy'])->name('product-images.destroy');
+        Route::delete('/products/{product}/', [ProductController::class, 'destroy'])->name('products.delete');
 
 
     });
